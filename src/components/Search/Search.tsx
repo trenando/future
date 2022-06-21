@@ -1,13 +1,19 @@
 import React from "react";
+import { GetInputValue, OnInputChange, OnKeyDown, SearchProps } from "./SearchTypes";
 
-export const Search = ({ searchValue, changeInputValue, search, handle }: any) => {
-  const getInputValue = () => {
+export const Search: React.FC<SearchProps> = ({
+  searchValue,
+  changeInputValue,
+  search,
+  handle,
+}) => {
+  const getInputValue: GetInputValue = () => {
     search(searchValue);
   };
-  const onInputChange = (event: { target: { value: string } }) => {
+  const onInputChange: OnInputChange = (event) => {
     changeInputValue(event.target.value);
   };
-  const onKeyDown = (event: any) => {
+  const onKeyDown: OnKeyDown = (event) => {
     handle(event);
   };
   return (

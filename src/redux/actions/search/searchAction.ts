@@ -17,7 +17,6 @@ export const searchValueAC:SearchValueAC = (payload) => ({
 export const getBooks:GetBooks = (payload) => async (dispatch) => {
   try {
     const data = await booksApi.search(payload);
-    console.log(data.items[0])
     dispatch(searchAC(data.items));
   } catch (err: any) {
     console.log(err.response);

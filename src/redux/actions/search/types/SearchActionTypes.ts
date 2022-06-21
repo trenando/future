@@ -1,4 +1,5 @@
 import { Dispatch } from "redux";
+import { Item } from "../../../state/stateType";
 import { PayloadActionFunction } from "../../ActionsTypes";
 import { SEARCH, SEARCH_VALUE } from "../searchAction";
 
@@ -9,12 +10,12 @@ export type SearchValueAction = {
 
 type SeacrhAction = {
   type: typeof SEARCH;
-  payload: Array<any>; // Типизировать
+  payload: Array<Item>
 };
 
 export type SearchValueAC = PayloadActionFunction<SearchValueAction, string>;
 
-export type SearchAC = PayloadActionFunction<SeacrhAction, any>;
+export type SearchAC = PayloadActionFunction<SeacrhAction, Array<Item>>;
 
 export type SearchActions = SearchValueAction | SeacrhAction;
 

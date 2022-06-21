@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "redux";
 import { getBooks, searchValueAC } from "../../redux/actions/search/searchAction";
 import { Search } from "./Search";
-import { SearchDispatch } from "./SearchTypes";
+import { ChangeInputValue, Handle, SearchDispatch, SearchProps } from "./SearchTypes";
 
 export const SearchContainer = () => {
   const dispatch: Dispatch<any> = useDispatch(); //типизировать
@@ -12,7 +12,7 @@ export const SearchContainer = () => {
     ({ search }: { search: { searchValue: string } }) => search.searchValue
   );
 
-  const changeInputValue = useCallback(
+  const changeInputValue: ChangeInputValue = useCallback(
     (payload: string) => {
       dispatch(searchValueAC(payload));
     },
@@ -26,8 +26,8 @@ export const SearchContainer = () => {
     [dispatch]
   );
 
-  const handle = (event: any) => {
-    if ((event.currentTarget === event.target && event.keyCode === 13)) {
+  const handle: Handle = (event) => {
+    if (event.currentTarget === event.target && event.keyCode === 13) {
       search(searchValue);
     }
   };
@@ -38,7 +38,7 @@ export const SearchContainer = () => {
     };
   }, [searchValue]);
 
-  const searchProps: any = {
+  const searchProps: SearchProps = {
     ...memoSearchProps,
     changeInputValue,
     search,
