@@ -16,6 +16,7 @@ export const searchReducer: SearchReducer = (state = initialState, action) => {
       items = action.payload;
       return {
         ...state,
+        searchValue:"",
         items,
       };
     }

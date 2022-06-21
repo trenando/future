@@ -7,10 +7,11 @@ export const booksApi: BooksApi = {
   async search(searchValue) {
     const res = await instance.get("", {
       params: {
-        q: searchValue,
+        q: `${searchValue}+subject:computers`,
         api_key: API_KEY,
       },
     });
+    console.log(res.data)
     return res.data;
   },
 };

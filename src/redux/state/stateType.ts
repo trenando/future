@@ -1,17 +1,19 @@
 export type StateType = {
   searchValue: string;
+  startIndex: number;
+  maxResults: number;
   items: Array<Item>;
 };
 
 export type Item = {
-  accessInfo: AccessInfo;
-  etag: string;
-  id: string;
   kind: string;
-  saleInfo: SaleInfo;
-  searchInfo: SearchInfo;
+  id: string;
+  etag: string;
   selfLink: string;
   volumeInfo: VolumeInfo;
+  accessInfo: AccessInfo;
+  saleInfo: SaleInfo;
+  searchInfo: SearchInfo;
 };
 
 type AccessInfo = {
@@ -63,6 +65,7 @@ type SearchInfo = {
 };
 
 type VolumeInfo = {
+  title: string;
   allowAnonLogging: boolean;
   authors: Array<string>;
   canonicalVolumeLink: string;
@@ -92,7 +95,6 @@ type VolumeInfo = {
     text: boolean;
     image: boolean;
   };
-  title: string;
 };
 
 const RUB = "RUB";

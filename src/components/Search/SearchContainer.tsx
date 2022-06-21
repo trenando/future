@@ -13,7 +13,7 @@ export const SearchContainer = () => {
   );
 
   const changeInputValue: ChangeInputValue = useCallback(
-    (payload: string) => {
+    (payload) => {
       dispatch(searchValueAC(payload));
     },
     [dispatch]
@@ -26,11 +26,14 @@ export const SearchContainer = () => {
     [dispatch]
   );
 
-  const handle: Handle = (event) => {
-    if (event.currentTarget === event.target && event.keyCode === 13) {
-      search(searchValue);
-    }
-  };
+  const handle: Handle = useCallback(
+    (event) => {
+      if (event.currentTarget === event.target && event.keyCode === 13) {
+        search(searchValue);
+      }
+    },
+    [search]
+  );
 
   const memoSearchProps = useMemo(() => {
     return {
@@ -50,6 +53,7 @@ export const SearchContainer = () => {
     return () => {
       window.removeEventListener("keydown", handle);
     };
-  });
+  }, [handle]);
+
   return <Search {...searchProps} />;
 };
