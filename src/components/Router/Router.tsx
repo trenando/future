@@ -1,6 +1,5 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import { HomeContainer } from "../../pages/Home/HomeContainer";
 import { route } from "./route";
 
 export const Router = () => {

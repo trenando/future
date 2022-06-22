@@ -1,24 +1,28 @@
-import { SEARCH, SEARCH_VALUE } from "../../actions/search/searchAction";
+import { LOAD_MORE, SEARCH, SEARCH_VALUE } from "../../actions/search/searchAction";
 import { initialState } from "../../state/initialState";
 import { SearchReducer } from "./types/SearchReducerTypes";
 
 export const searchReducer: SearchReducer = (state = initialState, action) => {
   switch (action.type) {
     case SEARCH_VALUE: {
-      const searchValue = action.payload;
+      const { payload } = action
       return {
         ...state,
-        searchValue,
+        ...payload,
       };
     }
     case SEARCH: {
-      let { items } = state;
-      items = action.payload;
+      const { payload } = action
       return {
         ...state,
-        searchValue:"",
-        items,
+        ...payload,
       };
+    }
+    case LOAD_MORE:{
+      return {
+        ...state,
+        items:[...state.items,...action.payload]
+      }
     }
     default: {
       return state;

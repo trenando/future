@@ -1,3 +1,5 @@
+import { SearchPayload } from "../components/Search/SearchTypes";
+
 export type BooksApi = {
-  search: (searchValue: string) => any;
+  search: (payload: SearchPayload) => any;
 };

@@ -1,20 +1,28 @@
-import React, { useMemo } from "react";
-import { useSelector } from "react-redux";
-import { Item } from "../../redux/state/stateType";
+import React, { useCallback, useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Dispatch } from "redux";
+import { loadMoreItems } from "../../redux/actions/search/searchAction";
 import { Home } from "./Home";
-import { HomeProps } from "./HomeTypes";
+import { HomeProps, LoadMore, SearchSelectorState } from "./HomeTypes";
 
 export const HomeContainer = () => {
-  const items = useSelector(({ search }: { search: { items: Array<Item> } }) => search.items);
+  const dispatch: Dispatch<any> = useDispatch(); //типизировать
 
-  const memoItems = useMemo(() => {
+  const search = useSelector(({ search }: SearchSelectorState) => search);
+
+  const memoSearch = useMemo(() => {
     return {
-      items,
+      ...search,
     };
-  }, [items]);
+  }, [search]);
+
+  const loadMore: LoadMore = useCallback((payload) => {
+    dispatch(loadMoreItems(payload))
+  }, [dispatch])
 
   const homeProps: HomeProps = {
-    ...memoItems,
+    ...memoSearch,
+    loadMore
   };
   return <Home {...homeProps} />;
 };

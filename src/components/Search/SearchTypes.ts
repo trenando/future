@@ -1,24 +1,20 @@
-export type HandleEvent = {
-  currentTarget: EventTarget | null;
-  target: EventTarget | null;
-  keyCode: number;
-};
+interface SearchValue {
+  searchValue: string,
+  category: string,
+  sortBy: string
+}
 
-export type SearchDispatch = (payload: string) => void;
+export interface SearchPayload extends SearchValue {
+  startIndex: number;
+  maxResults: number;
+}
 
-export type ChangeInputValue = (payload: string) => void;
-
-export type Handle = (event: HandleEvent) => void;
+export type SearchDispatch = (payload: SearchPayload, setSubmitting: SetSubmitting) => void;
 
 export type SearchProps = {
-  searchValue: string;
   search: SearchDispatch;
-  changeInputValue: ChangeInputValue;
-  handle: Handle;
 };
 
-export type GetInputValue = () => void;
+export type SetSubmitting = (isSubmitting: boolean) => void
 
-export type OnInputChange = (event: { target: { value: string } }) => void;
-
-export type OnKeyDown = (event: HandleEvent) => void;
+export type OnSubmit = (value: SearchValue, setSubmitting: SetSubmitting) => void;

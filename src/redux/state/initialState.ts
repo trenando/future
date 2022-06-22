@@ -2,7 +2,10 @@ import { StateType } from "./stateType";
 
 export const initialState: StateType = {
   searchValue: "",
-  startIndex: 0,
-  maxResults:30,
+  category: "all",
+  sortBy: "relevance",
+  totalItems: null,
+  startIndex: null,
+  maxResults: null,
   items: [],
 };

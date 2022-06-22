@@ -1,7 +1,10 @@
 export type StateType = {
-  searchValue: string;
-  startIndex: number;
-  maxResults: number;
+  searchValue: string,
+  category: string,
+  sortBy: string
+  startIndex: number | null;
+  maxResults: number | null;
+  totalItems: number | null;
   items: Array<Item>;
 };
 

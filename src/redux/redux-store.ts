@@ -5,7 +5,7 @@ import logger from "redux-logger";
 import { searchReducer } from "./reducers/search/searchReducer";
 
 const rootReducer = combineReducers({
-  search: searchReducer,
+  search: searchReducer
 });
 
 export const store = configureStore({
