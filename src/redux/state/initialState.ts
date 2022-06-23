@@ -7,5 +7,6 @@ export const initialState: StateType = {
   totalItems: null,
   startIndex: null,
   maxResults: null,
+  isLoaded:false,
   items: [],
 };

@@ -5,6 +5,7 @@ export type StateType = {
   startIndex: number | null;
   maxResults: number | null;
   totalItems: number | null;
+  isLoaded:boolean;
   items: Array<Item>;
 };
 

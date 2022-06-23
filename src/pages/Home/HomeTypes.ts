@@ -11,6 +11,7 @@ export interface LoadMorePayload {
 export interface SearchState extends LoadMorePayload {
   items: Array<Item>;
   totalItems: number;
+  isLoaded:boolean;
 }
 
 export interface HomeProps extends SearchState {
