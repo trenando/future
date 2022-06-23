@@ -18,6 +18,16 @@ export const booksApi: BooksApi = {
         api_key: API_KEY,
       },
     });
+    if (res.data.totalItems === 0) throw new Error("По запросу ничего не найдено")
     return res.data;
   },
+
+  async bookById(bookId) {
+    const res = await instance.get(`/${bookId}`, {
+      params: {
+        api_key: API_KEY
+      }
+    })
+    return res.data;
+  }
 };

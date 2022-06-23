@@ -1,4 +1,5 @@
 import { booksApi } from "../../../api/books/booksApi";
+import { errorAC } from "../error/errorAction";
 import { GetBooks, LoadedAC, LoadMoreAC, LoadMoreItems, SearchAC, SearchValueAC } from "./types/SearchActionTypes";
 
 export const SEARCH = "SEARCH";
@@ -21,32 +22,42 @@ const loadMoreAC: LoadMoreAC = (payload) => ({
   payload
 })
 
-const loadedAC: LoadedAC = (payload) => ({
+export const loadedAC: LoadedAC = (payload) => ({
   type: LOADER,
   payload
 })
 
 export const getBooks: GetBooks = (payload, setSubmitting) => async (dispatch) => {
+  dispatch(loadedAC(true))
   try {
-    dispatch(loadedAC(true))
+    dispatch(errorAC(null))
     const data = await booksApi.search(payload);
-    setSubmitting(false)
     dispatch(searchValueAC(payload))
     dispatch(searchAC(data));
-    dispatch(loadedAC(false))
   } catch (err: any) {
-    console.log(err.response);
+    if (err.response && err.response.status >= 500) {
+      dispatch(errorAC("Возникла проблема с ссервером"))
+    } else {
+      dispatch(errorAC(err.message))
+    }
   }
+  setSubmitting(false)
+  dispatch(loadedAC(false))
 };
 
 export const loadMoreItems: LoadMoreItems = (payload) => async (dispatch) => {
+  dispatch(loadedAC(true))
   try {
-    dispatch(loadedAC(true))
+    dispatch(errorAC(null))
     const newItems = await booksApi.search(payload);
     dispatch(searchValueAC(payload))
     dispatch(loadMoreAC(newItems.items))
-    dispatch(loadedAC(false))
-  } catch (err) {
-    console.log(err)
+  } catch (err: any) {
+    if (err.response && err.response.status >= 500) {
+      dispatch(errorAC("Возникла проблема с ссервером"))
+    } else {
+      dispatch(errorAC(err.response.message))
+    }
   }
+  dispatch(loadedAC(false))
 }

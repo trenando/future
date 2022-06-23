@@ -1,14 +1,14 @@
 import React from "react";
-import { Items } from "../../components/Items/Items";
+import { ItemsContainer } from "../../components/Items/ItemsContainer";
 import { Loader } from "../../components/Loader/Loader";
 import { LoadMore } from "../../components/LoadMore/LoadMore";
 import { SearchContainer } from "../../components/Search/SearchContainer";
 import { HomeProps } from "./HomeTypes";
 
 export const Home: React.FC<HomeProps> = (
-  { items, totalItems, searchValue,
-    category, sortBy, startIndex,
-    maxResults, isLoaded, loadMore }) => {
+  { totalItems, searchValue, category,
+    sortBy, startIndex, maxResults,
+    isLoaded, loadMore, errorMessage }) => {
 
   const paginate = () => {
     const payload = {
@@ -20,13 +20,20 @@ export const Home: React.FC<HomeProps> = (
     }
     loadMore(payload)
   }
-  
+
   return (
     <div>
       <SearchContainer />
+      {errorMessage ? <div>{errorMessage}</div> : null}
       {isLoaded && !totalItems ? <Loader /> : null}
+      {
+        /*
+        * При одинаковых запросах приходит разное количество totalItems
+        * Тестировалось через postman
+        */
+      }
       {totalItems ? <span>{totalItems}</span> : null}
-      <Items items={items} />
+      <ItemsContainer />
       <LoadMore
         totalItems={totalItems}
         startIndex={startIndex}

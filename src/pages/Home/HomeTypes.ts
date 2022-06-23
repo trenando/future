@@ -11,10 +11,11 @@ export interface LoadMorePayload {
 export interface SearchState extends LoadMorePayload {
   items: Array<Item>;
   totalItems: number;
-  isLoaded:boolean;
+  isLoaded: boolean;
 }
 
 export interface HomeProps extends SearchState {
+  errorMessage: string | null;
   loadMore: (payload: LoadMorePayload) => void;
 };
 

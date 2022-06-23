@@ -7,6 +7,8 @@ export const initialState: StateType = {
   totalItems: null,
   startIndex: null,
   maxResults: null,
-  isLoaded:false,
+  isLoaded: false,
   items: [],
-};
+  book: undefined,
+  errorMessage: null
+}

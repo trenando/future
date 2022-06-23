@@ -9,6 +9,13 @@ export const HomeContainer = () => {
   const dispatch: Dispatch<any> = useDispatch(); //типизировать
 
   const search = useSelector(({ search }: SearchSelectorState) => search);
+  const errorMessage = useSelector(({ error }: { error: { errorMessage: string | null } }) => error.errorMessage)
+
+  const memoErrorMessage = useMemo(() => {
+    return {
+      errorMessage,
+    };
+  }, [errorMessage]);
 
   const memoSearch = useMemo(() => {
     return {
@@ -22,6 +29,7 @@ export const HomeContainer = () => {
 
   const homeProps: HomeProps = {
     ...memoSearch,
+    ...memoErrorMessage,
     loadMore
   };
   return <Home {...homeProps} />;
