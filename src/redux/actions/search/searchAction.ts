@@ -1,11 +1,12 @@
 import { booksApi } from "../../../api/books/booksApi";
 import { errorAC } from "../error/errorAction";
-import { GetBooks, LoadedAC, LoadMoreAC, LoadMoreItems, SearchAC, SearchValueAC } from "./types/SearchActionTypes";
+import { BadSearchAC, GetBooks, LoadedAC, LoadMoreAC, LoadMoreItems, SearchAC, SearchValueAC } from "./types/SearchActionTypes";
 
 export const SEARCH = "SEARCH";
 export const SEARCH_VALUE = "SEARCH_VALUE";
 export const LOAD_MORE = "LOAD_MORE";
 export const LOADER = "LOADER";
+export const BAD_SEARCH = "BAD_SEARCH"
 
 export const searchAC: SearchAC = (payload) => ({
   type: SEARCH,
@@ -27,6 +28,10 @@ export const loadedAC: LoadedAC = (payload) => ({
   payload
 })
 
+const badSearchAC: BadSearchAC = () => ({
+  type: BAD_SEARCH
+})
+
 export const getBooks: GetBooks = (payload, setSubmitting) => async (dispatch) => {
   dispatch(loadedAC(true))
   try {
@@ -36,8 +41,10 @@ export const getBooks: GetBooks = (payload, setSubmitting) => async (dispatch) =
     dispatch(searchAC(data));
   } catch (err: any) {
     if (err.response && err.response.status >= 500) {
-      dispatch(errorAC("Возникла проблема с ссервером"))
+      dispatch(badSearchAC());
+      dispatch(errorAC("Возникла проблема с сервером"))
     } else {
+      dispatch(badSearchAC());
       dispatch(errorAC(err.message))
     }
   }

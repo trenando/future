@@ -27,26 +27,32 @@ export const Search: React.FC<SearchProps> = ({ search }) => {
       {({ isSubmitting }) => (
         <Form className={styles.form}>
           <div className={styles.form__block}>
-            <span>Search for book</span>
+            <span className={styles.form__title}>Search for book</span>
             <div className={styles.form__search}>
-              <Field type="text" name="searchValue" placeholder="search" />
-              <button type="submit" disabled={isSubmitting}>search</button>
+              <Field type="text" name="searchValue" placeholder="search" className={styles.input} />
+              <button type="submit" disabled={isSubmitting} className={styles.button}>search</button>
             </div>
-            <div>
-              <Field as="select" name="category">
-                {
-                  Object.entries(categoryValues).map(([key, value]) => {
-                    return <option key={key} value={value}>{value}</option>
-                  })
-                }
-              </Field>
-              <Field as="select" name="sortBy">
-                {
-                  Object.entries(sortByValues).map(([key, value]) => {
-                    return <option key={key} value={value}>{value}</option>
-                  })
-                }
-              </Field>
+            <div className={styles.form__selectors}>
+              <div className={styles.form__selector}>
+                <span>Categories</span>
+                <Field as="select" name="category" className={styles.select}>
+                  {
+                    Object.entries(categoryValues).map(([key, value]) => {
+                      return <option key={key} value={value}>{value}</option>
+                    })
+                  }
+                </Field>
+              </div>
+              <div className={styles.form__selector}>
+                <span>Sorting by</span>
+                <Field as="select" name="sortBy" className={styles.select}>
+                  {
+                    Object.entries(sortByValues).map(([key, value]) => {
+                      return <option key={key} value={value}>{value}</option>
+                    })
+                  }
+                </Field>
+              </div>
             </div>
           </div>
         </Form>

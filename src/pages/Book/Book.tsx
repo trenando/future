@@ -5,6 +5,7 @@ import { Category } from "../../components/Items/Category/Category";
 import { Image } from "../../components/Items/Image/Image";
 import { Loader } from "../../components/Loader/Loader";
 import { BookProps } from "./BookTypes";
+import styles from "./Book.module.scss";
 
 export const Book: React.FC<BookProps> = ({ volumeInfo, errorMessage, isLoaded }) => {
     if (!volumeInfo || isLoaded) {
@@ -18,19 +19,25 @@ export const Book: React.FC<BookProps> = ({ volumeInfo, errorMessage, isLoaded }
     }
     const { title, subtitle, authors, categories, imageLinks } = volumeInfo;
     return (
-        <div>
-            <div>
-                <div>
+        <div className={styles.section}>
+            <div className={styles.block}>
+                <div className={styles.image}>
                     <Image links={imageLinks} />
                 </div>
-                <div>
-                    <span>{title}</span>
-                    <span>{subtitle}</span>
-                    <Authors authors={authors} />
-                    <Category categories={categories} />
+                <div className={styles.content}>
+                    <div className={categories ? styles.category : styles.hide}>
+                        <Category categories={categories} />
+                    </div>
+                    <span className={styles.title}>{title}</span>
+                    <div className={authors ? styles.authors : styles.hide}>
+                        <Authors authors={authors} />
+                    </div>
+                    <span className={styles.subtitle}>{subtitle}</span>
                 </div>
             </div>
-            <Link to="/">Вернуться назад</Link>
+            <div className={styles.return}>
+                <Link to="/">Вернуться назад</Link>
+            </div>
         </div>
     )
 };

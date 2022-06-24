@@ -1,9 +1,13 @@
 #root {
-  --content-background-color: #ffffff;
-  --main-border-color: #212425;
+  --content-background-color: #e9e8dd;
   --nav-hover-color: #4a5663;
+  --second-text-color: #e9e8dd;
+  --main-text-color: #3d3d3d;
+  --main-border-color: #212425;
   --main-button-color: #212425;
-  --link-text-color: #e9e8dd;
+  --field-border: #212425;
+  --field-shadow: #2664a5;
+  --field-active: #3388e2;
 }
 
 body {
@@ -25,7 +29,6 @@ p {
 
 a {
   text-decoration: none;
-  color: var(--link-text-color);
 }
 
 ul {

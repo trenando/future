@@ -6,7 +6,7 @@ import { Search } from "./Search";
 import { SearchDispatch, SearchProps } from "./SearchTypes";
 
 export const SearchContainer = () => {
-  const dispatch: Dispatch<any> = useDispatch(); //типизировать
+  const dispatch: Dispatch<any> = useDispatch();
 
   const search: SearchDispatch = useCallback(
     (payload, setSubmitting) => {

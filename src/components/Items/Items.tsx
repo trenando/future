@@ -21,10 +21,18 @@ export const Items: React.FC<ItemsProps> = ({ items, loading }) => {
             items.map((item: Item, index: number) => {
                 //При подгрзке items item.id могут повторяться
                 return <div key={`${index}${item.id}`} onClick={() => redirect(item.id)} className={styles.item}>
-                    <Image links={item.volumeInfo.imageLinks} />
-                    <Category categories={item.volumeInfo.categories} />
-                    <span>{item.volumeInfo.title}</span>
-                    <Authors authors={item.volumeInfo.authors} />
+                    <div className={styles.image}>
+                        <Image links={item.volumeInfo.imageLinks} />
+                    </div>
+                    <div className={styles.content}>
+                        <div className={item.volumeInfo.categories ? styles.category:styles.hide}>
+                            <Category categories={item.volumeInfo.categories} />
+                        </div>
+                        <span>{item.volumeInfo.title}</span>
+                        <div className={item.volumeInfo.authors ? styles.authors : styles.hide}>
+                            <Authors authors={item.volumeInfo.authors} />
+                        </div>
+                    </div>
                 </div>
             })
         }

@@ -6,7 +6,7 @@ import { Home } from "./Home";
 import { HomeProps, LoadMore, SearchSelectorState } from "./HomeTypes";
 
 export const HomeContainer = () => {
-  const dispatch: Dispatch<any> = useDispatch(); //типизировать
+  const dispatch: Dispatch<any> = useDispatch();
 
   const search = useSelector(({ search }: SearchSelectorState) => search);
   const errorMessage = useSelector(({ error }: { error: { errorMessage: string | null } }) => error.errorMessage)

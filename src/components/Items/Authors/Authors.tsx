@@ -1,6 +1,6 @@
 import React from "react";
 
-export const Authors = ({ authors }: any) => {
+export const Authors: React.FC<{ authors: Array<string> | undefined }> = ({ authors }) => {
     return <>
         {
             authors

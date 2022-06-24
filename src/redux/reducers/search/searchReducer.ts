@@ -1,4 +1,4 @@
-import { LOADER, LOAD_MORE, SEARCH, SEARCH_VALUE } from "../../actions/search/searchAction";
+import { BAD_SEARCH, LOADER, LOAD_MORE, SEARCH, SEARCH_VALUE } from "../../actions/search/searchAction";
 import { initialState } from "../../state/initialState";
 import { SearchReducer } from "./types/SearchReducerTypes";
 
@@ -17,6 +17,13 @@ export const searchReducer: SearchReducer = (state = initialState, action) => {
         ...state,
         ...payload,
       };
+    }
+    case BAD_SEARCH:{
+      return {
+        ...state,
+        items:[],
+        totalItems:null
+      }
     }
     case LOAD_MORE: {
       return {
