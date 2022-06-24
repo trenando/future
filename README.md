@@ -13,6 +13,7 @@ yarn
 * React
 * Redux
 * Axios
+* Formik
 * Scss
 * Redux-thunk
 * Typescript
