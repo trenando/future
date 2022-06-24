@@ -6,7 +6,7 @@ export const Authors: React.FC<{ authors: Array<string> | undefined }> = ({ auth
             authors
                 ?
                 <div>
-                    {authors.map((author: string) => <span key={author}>{author}</span>)}
+                    {authors.map((author: string) => <span key={author}>{`${author} `}</span>)}
                 </div>
                 :
                 null
