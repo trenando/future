@@ -1,12 +1,11 @@
 import React, { useCallback } from "react";
-import { useDispatch } from "react-redux";
-import { Dispatch } from "redux";
 import { getBooks } from "../../redux/actions/search/searchAction";
+import { useAppDispatch } from "../../redux/ReduxTypes";
 import { Search } from "./Search";
 import { SearchDispatch, SearchProps } from "./SearchTypes";
 
 export const SearchContainer = () => {
-  const dispatch: Dispatch<any> = useDispatch();
+  const dispatch = useAppDispatch();
 
   const search: SearchDispatch = useCallback(
     (payload, setSubmitting) => {

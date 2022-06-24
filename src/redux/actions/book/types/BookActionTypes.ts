@@ -1,17 +1,20 @@
-import { Dispatch } from "redux";
+import { AppThunk } from "../../../ReduxTypes";
 import { BookState } from "../../../state/stateType";
-import { PayloadActionFunction } from "../../ActionsTypes";
-import { ErrorAction } from "../../error/types/ErrorActionTypes";
-import { LoaderAction } from "../../search/types/SearchActionTypes";
-import { GET_BOOK } from "../bookAction";
+import { ActionFunction, PayloadActionFunction } from "../../ActionsTypes";
+import { GET_BOOK, UNMOUNT } from "../bookAction";
 
 type BookAction = {
     type: typeof GET_BOOK,
     payload: BookState
 }
 
+export type UnmountAction = {
+    type: typeof UNMOUNT
+}
+
+export type UnmountAC = ActionFunction<UnmountAction>
 export type BookAC = PayloadActionFunction<BookAction, BookState>
 
-export type BookActions = BookAction;
+export type BookActions = BookAction | UnmountAction;
 
-export type GetBook = (bookId: string) => (dispatch: Dispatch<BookAction | LoaderAction | ErrorAction>) => void
+export type GetBook = (bookId: string) => AppThunk

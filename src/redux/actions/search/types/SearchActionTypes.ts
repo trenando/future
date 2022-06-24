@@ -1,6 +1,7 @@
 import { Dispatch } from "redux";
 import { SearchPayload, SetSubmitting } from "../../../../components/Search/SearchTypes";
 import { LoadMorePayload } from "../../../../pages/Home/HomeTypes"
+import { AppThunk } from "../../../ReduxTypes";
 import { Item } from "../../../state/stateType";
 import { ActionFunction, PayloadActionFunction } from "../../ActionsTypes";
 import { ErrorAction } from "../../error/types/ErrorActionTypes";
@@ -43,6 +44,6 @@ export type LoadedAC = PayloadActionFunction<LoaderAction, boolean>;
 
 export type SearchActions = SearchValueAction | SeacrhAction | LoadMoreAction | LoaderAction | BadSearch;
 
-export type GetBooks = (payload: SearchPayload, setSubmitting: SetSubmitting) => (dispatch: Dispatch<SearchValueAction | SeacrhAction | LoaderAction | ErrorAction | BadSearch>) => void;
+export type GetBooks = (payload: SearchPayload, setSubmitting: SetSubmitting) => AppThunk
 
-export type LoadMoreItems = (payload: LoadMorePayload) => (dispatch: Dispatch<SearchValueAction | LoadMoreAction | LoaderAction | ErrorAction>) => void;
+export type LoadMoreItems = (payload: LoadMorePayload) => AppThunk

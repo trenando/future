@@ -61,7 +61,7 @@ export const loadMoreItems: LoadMoreItems = (payload) => async (dispatch) => {
     dispatch(loadMoreAC(newItems.items))
   } catch (err: any) {
     if (err.response && err.response.status >= 500) {
-      dispatch(errorAC("Возникла проблема с ссервером"))
+      dispatch(errorAC("Server problems"))
     } else {
       dispatch(errorAC(err.response.message))
     }

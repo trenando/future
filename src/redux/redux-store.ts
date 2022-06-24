@@ -6,7 +6,7 @@ import { searchReducer } from "./reducers/search/searchReducer";
 import { bookReducer } from "./reducers/book/bookReducer";
 import { errorReducer } from "./reducers/error/errorReducer";
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
   search: searchReducer,
   book: bookReducer,
   error: errorReducer

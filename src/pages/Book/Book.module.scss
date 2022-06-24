@@ -134,3 +134,26 @@
 .hide{
     display: none;
 }
+
+.error{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    text-align: center;
+    @media (max-width: 767px) {
+        margin-top: 15px;
+    }
+    @media (max-width: 550px) {
+        margin-top: 10px;
+    }
+    span {
+        min-width: 300px;
+        margin: 0 5px;
+        height: 30px;
+        background-color: var(--content-background-color);
+        border: 2px solid var(--main-border-color);
+        border-radius: 5px;
+        box-shadow: 0px 8px 16px -8px var(--main-border-color);
+    }
+}

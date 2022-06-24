@@ -1,20 +1,20 @@
 import React, { useCallback, useEffect, useMemo } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { Dispatch } from "redux";
-import { getBook } from "../../redux/actions/book/bookAction";
+import { getBook, unmountAC } from "../../redux/actions/book/bookAction";
+import { useAppDispatch } from "../../redux/ReduxTypes";
 import { BookState } from "../../redux/state/stateType";
 import { Book } from "./Book";
 import { BookProps } from "./BookTypes";
 
 export const BookContainer = () => {
-    const dispatch: Dispatch<any> = useDispatch()
+    const dispatch = useAppDispatch()
 
     const { bookId } = useParams()
 
     const isLoaded = useSelector(({ search }: { search: { isLoaded: boolean } }) => search.isLoaded);
     const book = useSelector(({ book }: { book: { book: BookState } }) => book.book);
-    const errorMessage = useSelector(({ error }: { error: { message: string | null } }) => error.message)
+    const errorMessage = useSelector(({ error }: { error: { errorMessage: string | null } }) => error.errorMessage)
 
     const memoErrorMessage = useMemo(() => {
         return {
@@ -35,17 +35,25 @@ export const BookContainer = () => {
     }, [book])
 
     const bookById = useCallback(() => {
-        dispatch(getBook(bookId as string))
+        if (bookId) dispatch(getBook(bookId))
     }, [dispatch, bookId])
+
+    const unmount = useCallback(() => {
+        dispatch(unmountAC())
+    }, [dispatch])
 
     useEffect(() => {
         bookById()
     }, [bookById])
 
+    useEffect(() => {
+        return () => unmount()
+    }, [unmount])
+
     const bookProps: BookProps = {
         ...memoBook,
         ...memoErrorMessage,
-        ...memoIsLoaded
+        ...memoIsLoaded,
     }
 
     return <Book {...bookProps} />

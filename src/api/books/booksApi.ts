@@ -18,7 +18,7 @@ export const booksApi: BooksApi = {
         api_key: API_KEY,
       },
     });
-    if (res.data.totalItems === 0) throw new Error("По запросу ничего не найдено")
+    if (res.data.totalItems === 0) throw new Error("No results found")
     return res.data;
   },
 

@@ -15,6 +15,8 @@ export type SearchProps = {
   search: SearchDispatch;
 };
 
+export type Redirect = () => void;
+
 export type SetSubmitting = (isSubmitting: boolean) => void
 
 export type OnSubmit = (value: SearchValue, setSubmitting: SetSubmitting) => void;

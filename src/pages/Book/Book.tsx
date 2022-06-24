@@ -8,15 +8,18 @@ import { BookProps } from "./BookTypes";
 import styles from "./Book.module.scss";
 
 export const Book: React.FC<BookProps> = ({ volumeInfo, errorMessage, isLoaded }) => {
-    if (!volumeInfo || isLoaded) {
+    if (isLoaded) {
         return <Loader />
     }
     if (errorMessage) {
-        return <div>
+        return <div className={styles.error}>
             <span>{errorMessage}</span>
-            <Link to="/">Вернуться назад</Link>
+            <div className={styles.return}>
+                <Link to="/">Return back</Link>
+            </div>
         </div>
     }
+    if (!volumeInfo) return null
     const { title, subtitle, authors, categories, imageLinks } = volumeInfo;
     return (
         <div className={styles.section}>
@@ -36,7 +39,7 @@ export const Book: React.FC<BookProps> = ({ volumeInfo, errorMessage, isLoaded }
                 </div>
             </div>
             <div className={styles.return}>
-                <Link to="/">Вернуться назад</Link>
+                <Link to="/">Return back</Link>
             </div>
         </div>
     )

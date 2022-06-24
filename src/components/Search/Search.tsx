@@ -1,10 +1,13 @@
 import { Field, Form, Formik } from "formik";
 import React from "react";
-import { OnSubmit, SearchProps } from "./SearchTypes";
+import { OnSubmit, Redirect, SearchProps } from "./SearchTypes";
 import { categoryValues, sortByValues } from "./selectorsValue";
 import styles from "./Search.module.scss";
+import { useNavigate } from "react-router-dom";
 
 export const Search: React.FC<SearchProps> = ({ search }) => {
+  const navigate = useNavigate()
+
   const onSubmit: OnSubmit = (value, setSubmitting) => {
     const payload = {
       ...value,
@@ -12,6 +15,10 @@ export const Search: React.FC<SearchProps> = ({ search }) => {
       maxResults: 30
     }
     search(payload, setSubmitting)
+  }
+
+  const redirect: Redirect = () => {
+    navigate("/")
   }
 
   return (
@@ -30,7 +37,7 @@ export const Search: React.FC<SearchProps> = ({ search }) => {
             <span className={styles.form__title}>Search for book</span>
             <div className={styles.form__search}>
               <Field type="text" name="searchValue" placeholder="search" className={styles.input} />
-              <button type="submit" disabled={isSubmitting} className={styles.button}>search</button>
+              <button type="submit" disabled={isSubmitting} className={styles.button} onClick={() => redirect()}>search</button>
             </div>
             <div className={styles.form__selectors}>
               <div className={styles.form__selector}>
